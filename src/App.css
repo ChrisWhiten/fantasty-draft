@@ -1,0 +1,190 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 80px;
+}
+
+.App-header {
+  background-color: #222;
+  height: 150px;
+  padding: 20px;
+  color: white;
+}
+
+.App-intro {
+  font-size: large;
+}
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.filter-type {
+  margin-left: .2em;
+  border: 2px #aaa solid;
+  border-radius: 20px;
+  padding: .2em;
+  opacity: 0.6;
+}
+
+.filter-type:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.delete-filter {
+  margin-left: .2em;
+  border: 2px #cc8000 solid;
+  padding: .2em;
+  padding: .2em;;
+  opacity: 0.6;
+  background-color: #ffa000;
+  border-radius: 20px;
+  color: #fff;
+}
+
+.delete-filter:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.submit-filter {
+  margin-left: .2em;
+  border: 2px #cc8000 solid;
+  padding: .2em;
+  opacity: 0.6;
+  background-color: #FFA000;
+  border-radius: 20px;
+  color: #fff;
+}
+
+.submit-filter:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.filter-row {
+  margin: 1em;
+}
+
+.player-table {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.player-table thead {
+  visibility: hidden;
+  background: #fafafa;
+}
+
+@media screen and (min-width: 600px) {
+  .player-table thead {
+    visibility: visible;
+  }
+}
+
+.player-table tr {
+  border: 1px solid #ddd;
+  border-bottom: 2px solid #ddd;
+  padding: 5px;
+  margin-bottom: 10px;
+  display: block;
+}
+
+@media screen and (min-width: 600px) {
+  .player-table tr {
+    display: table-row;
+    border-bottom-width: 1px;
+    margin-bottom: 0;
+  }
+
+  .player-table tr:nth-child(even) {
+    background: #fafafa;
+  }
+}
+
+.player-table th, .player-table td {
+  padding: 10px;
+  text-align: left;
+}
+
+.player-table th {
+  text-transform: uppercase;
+}
+
+.player-table td {
+  display: block;
+  text-align: right;
+  font-size: 13px;
+  border-bottom: 1px dotted #ddd;
+}
+
+.player-table td:last-child {
+  border-bottom: none;
+}
+
+@media screen and (min-width: 600px) {
+  .player-table td {
+    display: table-cell;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: none;
+  }
+}
+
+.player-table td:before {
+  content: attr(data-label);
+  float: left;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+@media screen and (min-width: 600px) {
+  .player-table td:before {
+    content: '';
+    display: none;
+  }
+}
+
+.settings {
+  margin: 1em;
+  display: flex;
+  justify-content: flex-end
+}
+
+.visualization circle {
+  fill: deepskyblue;
+  r: 5;
+}
+.visualization circle:hover {
+  fill: rgb(250, 200, 0);
+  r: 8;
+  cursor: pointer;
+  transition: all 0.1s;
+}
+
+.visualization-tooltip {
+  position: absolute;
+  text-align: center;
+  width: 60px;
+  padding: 2px;
+  font: 12px sans-serif;
+  background: lightsteelblue;
+  border: 0px;
+  border-radius: 8px;
+  pointer-events: none;
+}
+
+.player-overlay {
+  position: fixed;
+  font: 12px sans-serif;
+  width: 60px;
+  background: lightsteelblue;
+}
