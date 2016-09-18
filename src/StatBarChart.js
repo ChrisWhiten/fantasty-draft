@@ -5,9 +5,9 @@ class StatBarChart extends Component {
   constructor(props) {
     super(props);
 
-    this.margin = 15;
-    this.width = 300 - this.margin;
-    this.height = 100 - this.margin;
+    this.margin = 10;
+    this.width = 600 - this.margin;
+    this.height = 80 - this.margin;
   }
 
   componentDidMount() {
@@ -26,7 +26,7 @@ class StatBarChart extends Component {
     const maxY = d3.max(this.props.data, d => { return d.value });
 
     const xAxisScale = d3.scale.ordinal().domain(this.props.data.map(u => { return u.name; })).rangeRoundBands([0, this.width], .1);
-    const yAxisScale = d3.scale.linear().domain([0, maxY]).range([this.height, 0]); // y axis top is 0, bottom is max val
+    const yAxisScale = d3.scale.linear().domain([0, maxY]).range([this.height - this.margin, 0]); // y axis top is 0, bottom is max val
 
     const bars = this.svg.selectAll('rect')
       .data(this.props.data);
@@ -72,6 +72,7 @@ class StatBarChart extends Component {
   render() {
     return (
       <svg id={`bar-chart-${this.props.type}`} className='bar-chart'>
+        <text y={0} x={this.width / 2} dy=".75em">{this.props.type}</text>
       </svg>
     );
   }
