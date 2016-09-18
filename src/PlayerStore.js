@@ -50,6 +50,7 @@ let myTeam = [];
 let perGame = false;
 let showScores = false;
 let visualize = false;
+let _users = {};
 
 const PlayerStore = assign({}, BaseStore, {
   getAllPlayers: function() {
@@ -58,6 +59,10 @@ const PlayerStore = assign({}, BaseStore, {
 
   getFilters: function() {
     return _filters;
+  },
+
+  getUsers: function() {
+    return _users;
   },
 
   perGame: function() {
@@ -151,6 +156,27 @@ PlayerStore.dispatchToken = AppDispatcher.register((action) => {
     case 'PLAYER_SELECTED_BY_ME':
       availablePlayers = availablePlayers.filter(p => p.name !== action.player.name);
       myTeam.push(action.player);
+      PlayerStore.emitChange();
+      break;
+
+    case 'SET_USERS':
+      action.users.forEach(user => {
+        _users[user] = [];
+      });
+
+      PlayerStore.emitChange();
+      break;
+
+    case 'DRAFT_PLAYER':
+      let selectedPlayer = availablePlayers.filter(player => {
+        return player.name.toLowerCase() === action.player.toLowerCase();
+      });
+      _users[action.user].push(selectedPlayer[0]);
+
+      availablePlayers = availablePlayers.filter(player => {
+        return player.name.toLowerCase() !== action.player.toLowerCase();
+      });
+
       PlayerStore.emitChange();
       break;
 

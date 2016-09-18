@@ -46,6 +46,7 @@ class PlayerList extends Component {
           <table className='player-table'>
             <thead>
               <tr>
+                <th>#</th>
                 <th onClick={this._setSort.bind(this, 'name')}>Name</th>
                 <th>Team</th>
                 <th>Positions</th>
@@ -65,9 +66,10 @@ class PlayerList extends Component {
             </thead>
             <tbody>
               {
-                sortedPlayers.map(p => {
+                sortedPlayers.map((p, idx) => {
                   return (
                     <tr key={`player-${p.name}`}>
+                      <td>{idx}</td>
                       <td>{p.name}</td>
                       <td>{p.team}</td>
                       <td>{p.positions.join()}</td>
@@ -95,6 +97,7 @@ class PlayerList extends Component {
           <table className='player-table'>
             <thead>
               <tr>
+                <th>#</th>
                 <th onClick={this._setSort.bind(this, 'name')}>Name</th>
                 <th>Team</th>
                 <th>Positions</th>
@@ -116,9 +119,10 @@ class PlayerList extends Component {
             </thead>
             <tbody>
               {
-                sortedPlayers.map(p => {
+                sortedPlayers.map((p, idx) => {
                   return (
                     <tr key={`player-${p.name}`}>
+                      <td>{idx}</td>
                       <td>{p.name}</td>
                       <td>{p.team}</td>
                       <td>{p.positions.join()}</td>

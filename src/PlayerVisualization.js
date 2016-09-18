@@ -81,7 +81,6 @@ class PlayerVisualization extends Component {
   }
 
   _closeMenu(menu) {
-    console.debug('called...');
     let filteredMenus = this.state.menus.filter(m => {
       return m.name !== menu.name;
     });

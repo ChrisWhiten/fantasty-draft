@@ -84,6 +84,10 @@
   background: #fafafa;
 }
 
+.player-table thead th {
+  cursor: pointer;
+}
+
 @media screen and (min-width: 600px) {
   .player-table thead {
     visibility: visible;
@@ -157,6 +161,16 @@
   margin: 1em;
   display: flex;
   justify-content: flex-end
+}
+
+.bar-chart rect {
+  fill: steelblue;
+}
+
+.bar-chart text {
+  fill: #000;
+  font: 10px sans-serif;
+  text-anchor: middle;
 }
 
 .visualization circle {

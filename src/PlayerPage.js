@@ -6,7 +6,7 @@ import FilterList from './FilterList.js';
 import FilterCreator from './FilterCreator.js';
 import SettingsMenu from './SettingsMenu.js';
 
-class DraftPage extends Component {
+class PlayerPage extends Component {
 
   constructor(props) {
     super(props);
@@ -40,9 +40,6 @@ class DraftPage extends Component {
 
     return (
       <div className="draft-page">
-        <div className="draft-page-header">
-          <h2>Welcome to the draft</h2>
-        </div>
         <SettingsMenu perGame={PlayerStore.perGame()} showScores={PlayerStore.showScores()} visualize={showVisualization} />
         <FilterCreator />
         <FilterList filters={this.state.filters} />
@@ -59,4 +56,4 @@ class DraftPage extends Component {
   }
 }
 
-export default DraftPage;
+export default PlayerPage;
