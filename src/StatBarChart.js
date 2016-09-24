@@ -25,7 +25,7 @@ class StatBarChart extends Component {
   _updateData() {
     const maxY = d3.max(this.props.data, d => { return d.value });
 
-    const xAxisScale = d3.scale.ordinal().domain(this.props.data.map(d => { console.debug('d:', d); return u.key; })).rangeRoundBands([0, this.width], .1);
+    const xAxisScale = d3.scale.ordinal().domain(this.props.data.map(d => { return d.key; })).rangeRoundBands([0, this.width], .1);
     const yAxisScale = d3.scale.linear().domain([0, maxY]).range([this.height - this.margin, 0]); // y axis top is 0, bottom is max val
 
     const bars = this.svg.selectAll('rect')
