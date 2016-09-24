@@ -25,7 +25,7 @@ class StatBarChart extends Component {
   _updateData() {
     const maxY = d3.max(this.props.data, d => { return d.value });
 
-    const xAxisScale = d3.scale.ordinal().domain(this.props.data.map(u => { return u.name; })).rangeRoundBands([0, this.width], .1);
+    const xAxisScale = d3.scale.ordinal().domain(this.props.data.map(d => { console.debug('d:', d); return u.key; })).rangeRoundBands([0, this.width], .1);
     const yAxisScale = d3.scale.linear().domain([0, maxY]).range([this.height - this.margin, 0]); // y axis top is 0, bottom is max val
 
     const bars = this.svg.selectAll('rect')
@@ -42,7 +42,7 @@ class StatBarChart extends Component {
       })
       .attr('width', xAxisScale.rangeBand())
       .attr('transform', (d, i) => {
-        return `translate(${xAxisScale(d.name)}, 0)`;
+        return `translate(${xAxisScale(d.key)}, 0)`;
       });
 
     bars.exit().remove();
@@ -52,13 +52,13 @@ class StatBarChart extends Component {
       .enter()
       .append('text')
       .text(d => {
-        return d.name;
+        return d.key;
       })
       .attr('x', xAxisScale.rangeBand() / 2)
       .attr('y', d => { return yAxisScale(d.value) + 3; })
       .attr('dy', '.75em')
       .attr('transform', (d) => {
-        return `translate(${xAxisScale(d.name)}, 0)`;
+        return `translate(${xAxisScale(d.key)}, 0)`;
       });
 
     bars.attr('height', d => {

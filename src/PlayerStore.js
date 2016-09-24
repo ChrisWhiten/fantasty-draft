@@ -6,6 +6,17 @@ import _players from './players.json';
 
 let allPlayers = _players;
 
+const weights = {
+  hits: 1,//0.8,
+  goals: 1,
+  assists: 1,
+  pims: 0,//0.8,
+  shots: 1,
+  fws: 0.5, //1,//0.8,
+  ppps: 1,
+  blocks: 1,//0.9,
+};
+
 function generatePlayerScores(players) {
   let totalHits = 0;
   let totalGoals = 0;
@@ -28,14 +39,14 @@ function generatePlayerScores(players) {
   });
 
   players.forEach(p => {
-    p.hitScore = ((p.h/totalHits)/p.gp) * 82;
-    p.goalScore = ((p.g/totalGoals)/p.gp) * 82;
-    p.assistScore = ((p.a/totalAssists)/p.gp) * 82;
-    p.pimScore = ((p.pim/totalPIMs)/p.gp) * 82;
-    p.shotScore = ((p.s/totalShots)/p.gp) * 82;
-    p.fwScore = ((p.f/totalFws)/p.gp) * 82;
-    p.pppScore = ((p.ppp/totalPPPs)/p.gp) * 82;
-    p.blockScore = ((p.b/totalBlocks)/p.gp) * 82;
+    p.hitScore = ((p.h/totalHits)/p.gp) * 82 * weights.hits;
+    p.goalScore = ((p.g/totalGoals)/p.gp) * 82 * weights.goals;
+    p.assistScore = ((p.a/totalAssists)/p.gp) * 82 * weights.assists;
+    p.pimScore = ((p.pim/totalPIMs)/p.gp) * 82 * weights.pims;
+    p.shotScore = ((p.s/totalShots)/p.gp) * 82 * weights.shots;
+    p.fwScore = ((p.f/totalFws)/p.gp) * 82 * weights.fws;
+    p.pppScore = ((p.ppp/totalPPPs)/p.gp) * 82 * weights.ppps;
+    p.blockScore = ((p.b/totalBlocks)/p.gp) * 82 * weights.blocks;
     p.playerScore = parseFloat((p.blockScore + p.shotScore + p.assistScore + p.goalScore + p.fwScore + p.hitScore + p.pppScore).toFixed(5));
     p.noFWPlayerScore = parseFloat((p.blockScore + p.shotScore + p.assistScore + p.goalScore + p.hitScore + p.pppScore).toFixed(5));
   });
