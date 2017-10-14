@@ -5,12 +5,19 @@ import BaseStore from './BaseStore.js';
 import _players from './players.json';
 
 let allPlayers = _players;
+allPlayers.forEach(p => {
+  p.name = `${p['First Name']} ${p['Last Name']}`;
+  p.positions = [];
+  p.Position.split('/').forEach(position => {
+    p.positions.push(position);
+  });
+});
 
 const weights = {
   hits: 1,//0.8,
   goals: 1,
   assists: 1,
-  pims: 0,//0.8,
+  pims: 0.1,//0.8,
   shots: 1,
   fws: 0.5, //1,//0.8,
   ppps: 1,
@@ -57,7 +64,6 @@ function generatePlayerScores(players) {
 generatePlayerScores(allPlayers);
 let _filters = [];
 let availablePlayers = allPlayers;
-let myTeam = [];
 let perGame = false;
 let showScores = false;
 let visualize = false;
@@ -159,17 +165,6 @@ PlayerStore.dispatchToken = AppDispatcher.register((action) => {
       PlayerStore.emitChange();
       break;
 
-    case 'PLAYER_SELECTED_BY_OTHER':
-      availablePlayers = availablePlayers.filter(p => p.name !== action.player.name);
-      PlayerStore.emitChange();
-      break;
-
-    case 'PLAYER_SELECTED_BY_ME':
-      availablePlayers = availablePlayers.filter(p => p.name !== action.player.name);
-      myTeam.push(action.player);
-      PlayerStore.emitChange();
-      break;
-
     case 'SET_USERS':
       action.users.forEach(user => {
         _users[user] = [];
@@ -179,14 +174,23 @@ PlayerStore.dispatchToken = AppDispatcher.register((action) => {
       break;
 
     case 'DRAFT_PLAYER':
-      let selectedPlayer = availablePlayers.filter(player => {
-        return player.name.toLowerCase() === action.player.toLowerCase();
-      });
-      _users[action.user].push(selectedPlayer[0]);
+      let selectedPlayer;
+      for (let i = 0; i < availablePlayers.length; i++) {
+        if (availablePlayers[i].name.toLowerCase() === action.player.toLowerCase()) {
+          selectedPlayer = availablePlayers[i];
+          availablePlayers.splice(i, 1);
+          break;
+        }
+      }
+      // let selectedPlayer = availablePlayers.filter(player => {
+      //   return player.name.toLowerCase() === action.player.toLowerCase();
+      // });
+      console.log(selectedPlayer);
+      _users[action.user].push(selectedPlayer/*[0]*/);
 
-      availablePlayers = availablePlayers.filter(player => {
-        return player.name.toLowerCase() !== action.player.toLowerCase();
-      });
+      // availablePlayers = availablePlayers.filter(player => {
+      //   return player.name.toLowerCase() !== action.player.toLowerCase();
+      // });
 
       PlayerStore.emitChange();
       break;

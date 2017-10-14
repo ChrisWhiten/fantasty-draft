@@ -6,11 +6,25 @@ class Summary extends Component {
   constructor(props) {
     super(props);
 
+    this.colours = [
+      '#FF0000',
+'#FF3300' ,
+'#ff6600' ,
+'#ff9900' ,
+'#FFCC00' ,
+'#FFFF00' ,
+'#ccff00',
+ '#99ff00',
+ '#66ff00',
+    '#33ff00',
+    '#00FF00'
+    ]
+
     this.state = {
       users: PlayerStore.getUsers(),
       sort: null,
       desc: true,
-      showViz: true,
+      showViz: false,
     };
 
     this.playerStoreChangeListener = this._handlePlayerStoreChangeListener.bind(this);
@@ -150,6 +164,12 @@ class Summary extends Component {
       return {name: u[10], value: u[9]};
     });
 
+    const foo = {
+      backgroundColor: this.colours[3],
+    }
+
+    console.log(sortedUsers);
+
     return (
       <div>
         {
@@ -192,7 +212,7 @@ class Summary extends Component {
                       <tr key={`user-${u[10]}`}>
                         <td>{u[10]}</td>
                         <td>{u[0].toFixed(4)}</td>
-                        <td>{u[1].toFixed(4)}</td>
+                        <td style={foo}>{u[1].toFixed(4)}</td>
                         <td>{u[2].toFixed(4)}</td>
                         <td>{u[3].toFixed(4)}</td>
                         <td>{u[4].toFixed(4)}</td>
